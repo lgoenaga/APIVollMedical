@@ -1,6 +1,8 @@
 package med.voll.api.service.implent;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import med.voll.api.dto.DtoActualizarMedico;
 import med.voll.api.dto.DtoListarMedicos;
 import med.voll.api.dto.DtoRegistroMedico;
 import med.voll.api.interfaces.MedicoRepository;
@@ -21,16 +23,14 @@ public class MedicoService implements MedicoInterfaces {
         medicoRepository.save(new Medico(dtoRegistroMedico));
     }
 
-    public void actualizarMedico() {
-        // TODO implement here
+    public void eliminarMedico(Long id) {
+
+        medicoRepository.deleteById(id);
     }
 
-    public void eliminarMedico() {
-        // TODO implement here
-    }
+    public DtoListarMedicos buscarMedico(Long id) {
 
-    public void buscarMedico() {
-        // TODO implement here
+        return new DtoListarMedicos(medicoRepository.findById(id).orElse(null));
     }
 
     public Page<DtoListarMedicos> listarMedicos(Pageable paginacion) {
@@ -38,4 +38,30 @@ public class MedicoService implements MedicoInterfaces {
         return medicoRepository.findAll(paginacion).map(DtoListarMedicos::new);
     }
 
+    public void actualizarMedico(@NotNull Long id, DtoActualizarMedico dtoActualizarMedico) {
+
+            Medico medico = medicoRepository.getReferenceById(id);
+            if (medico != null) {
+                if (dtoActualizarMedico.nombre() != null)
+                medico.setNombre(dtoActualizarMedico.nombre());
+                if (dtoActualizarMedico.telefono() != null)
+                medico.setTelefono(dtoActualizarMedico.telefono());
+                if (dtoActualizarMedico.direccion() != null)
+                medico.setDireccion(dtoActualizarMedico.direccion());
+
+            }
+    }
+
+    public void eliminarMedicoLogico(Long id) {
+
+            Medico medico = medicoRepository.getReferenceById(id);
+            if (medico != null) {
+                medico.setActivo(false);
+            }
+    }
+
+    public Page<DtoListarMedicos> buscarMedicoPorActivo(Pageable paginacion) {
+
+            return medicoRepository.findByActivoTrue(paginacion).map(DtoListarMedicos::new);
+    }
 }

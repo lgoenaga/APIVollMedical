@@ -1,10 +1,13 @@
 package med.voll.api.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.dto.DtoDireccion;
 import med.voll.api.dto.DtoRegistroMedico;
 
 @Table(name = "medicos")
@@ -24,6 +27,8 @@ public class Medico {
     private String documento;
     private String telefono;
 
+    private Boolean activo = true;
+
     @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
     @Embedded
@@ -36,5 +41,22 @@ public class Medico {
         this.telefono = dtoRegistroMedico.telefono();
         this.especialidad = dtoRegistroMedico.especialidad();
         this.direccion = new Direccion(dtoRegistroMedico.direccion());
+        this.activo = true;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setDireccion(@Valid DtoDireccion direccion) {
+        this.direccion = new Direccion(direccion);
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }
