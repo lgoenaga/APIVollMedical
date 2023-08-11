@@ -1,4 +1,4 @@
-package med.voll.api.dto;
+package med.voll.api.dto.request;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -8,20 +8,20 @@ import jakarta.validation.constraints.Pattern;
 import med.voll.api.model.Especialidad;
 
 public record DtoRegistroMedico(
-        @NotBlank
+        @NotBlank(message = "Nombre es obligatorio")
         String nombre,
-        @NotBlank
-        @Email
+        @NotBlank(message = "Email es obligatorio")
+        @Email(message = "Formato de email es inválido")
         String email,
-        @NotBlank
+        @NotBlank(message = "Documento es obligatorio")
         @Pattern(regexp = "^[0-9]{6,12}$")
         String documento,
-        @NotBlank
+        @NotBlank(message = "Telefono es obligatorio")
         @Pattern(regexp = "^[0-9]{10,13}$")
         String telefono,
-        @NotNull
+        @NotNull(message = "Especialidad es obligatorio")
         Especialidad especialidad,
-        @NotNull
+        @NotNull(message = "Direccion es obligatorio")
         @Valid
         DtoDireccion direccion
     )

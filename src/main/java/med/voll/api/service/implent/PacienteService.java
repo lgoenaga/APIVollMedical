@@ -1,8 +1,8 @@
 package med.voll.api.service.implent;
 
 import lombok.RequiredArgsConstructor;
-import med.voll.api.dto.DtoListarPacientes;
-import med.voll.api.dto.DtoRegistroPaciente;
+import med.voll.api.dto.response.DtoListarPacientes;
+import med.voll.api.dto.request.DtoRegistroPaciente;
 import med.voll.api.interfaces.PacienteRepository;
 import med.voll.api.model.Paciente;
 import med.voll.api.service.interfaces.PacienteInterfaces;

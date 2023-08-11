@@ -3,14 +3,19 @@ package med.voll.api.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import med.voll.api.dto.DtoActualizarMedico;
-import med.voll.api.dto.DtoListarMedicos;
-import med.voll.api.dto.DtoRegistroMedico;
+import med.voll.api.dto.request.DtoActualizarMedico;
+import med.voll.api.dto.response.DtoListarMedicos;
+import med.voll.api.dto.request.DtoRegistroMedico;
+import med.voll.api.dto.response.DtoResponseMedico;
 import med.voll.api.service.implent.MedicoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/medicos")
@@ -20,13 +25,17 @@ public class MedicoController {
     private final MedicoService medicoService;
 
     @PostMapping
-    public void registrarMedico(@RequestBody @Valid DtoRegistroMedico dtoRegistroMedico) {
-        medicoService.registrarMedico(dtoRegistroMedico);
+    public ResponseEntity<DtoRegistroMedico> registrarMedico(@RequestBody @Valid DtoRegistroMedico dtoRegistroMedico) {
+       ResponseEntity<DtoResponseMedico> dtoResponseMedico = medicoService.registrarMedico(dtoRegistroMedico);
+
+       URI uri = dtoResponseMedico.getHeaders().getLocation();
+
+       return ResponseEntity.created(Objects.requireNonNull(uri)).body(dtoRegistroMedico);
     }
 
     @GetMapping
-    public Page<DtoListarMedicos> listarMedicos(@PageableDefault(size = 5, sort = "nombre") Pageable paginacion) {
-        return medicoService.listarMedicos(paginacion);
+    public ResponseEntity <Page<DtoListarMedicos>> listarMedicos(@PageableDefault(sort = "nombre") Pageable paginacion) {
+        return ResponseEntity.ok(medicoService.listarMedicos(paginacion));
     }
 
     @GetMapping("/{id}")
@@ -36,8 +45,10 @@ public class MedicoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public void actualizarMedico(@PathVariable Long id, @RequestBody @Valid DtoActualizarMedico dtoActualizarMedico) {
+    public ResponseEntity<DtoActualizarMedico> actualizarMedico(@PathVariable Long id, @RequestBody @Valid DtoActualizarMedico dtoActualizarMedico) {
         medicoService.actualizarMedico(id, dtoActualizarMedico);
+
+        return ResponseEntity.ok(dtoActualizarMedico);
     }
 
     @DeleteMapping("/{id}")
@@ -47,8 +58,11 @@ public class MedicoController {
 
     @PutMapping("/{id}/eliminar")
     @Transactional
-    public void eliminarMedicoLogico(@PathVariable Long id) {
+    public ResponseEntity<Object> eliminarMedicoLogico(@PathVariable Long id) {
+
         medicoService.eliminarMedicoLogico(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/buscar")

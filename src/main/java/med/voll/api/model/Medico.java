@@ -2,13 +2,12 @@ package med.voll.api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.dto.DtoDireccion;
-import med.voll.api.dto.DtoRegistroMedico;
+import med.voll.api.dto.request.DtoDireccion;
+import med.voll.api.dto.request.DtoRegistroMedico;
 
 @Table(name = "medicos")
 @Entity(name = "Medico")
