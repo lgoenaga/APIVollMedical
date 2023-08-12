@@ -1,18 +1,17 @@
-package med.voll.api.service.implent;
+package med.voll.api.service;
 
 import lombok.RequiredArgsConstructor;
 import med.voll.api.dto.response.DtoListarPacientes;
 import med.voll.api.dto.request.DtoRegistroPaciente;
 import med.voll.api.interfaces.PacienteRepository;
 import med.voll.api.model.Paciente;
-import med.voll.api.service.interfaces.PacienteInterfaces;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PacienteService implements PacienteInterfaces {
+public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
 

@@ -1,3 +1,4 @@
+use vollmed_api;
 create table medicos (
                          id bigint not null auto_increment,
                          nombre varchar(100) not null,

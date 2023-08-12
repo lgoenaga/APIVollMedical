@@ -1,3 +1,4 @@
+use vollmed_api;
 create table pacientes(
 
                           id int not null auto_increment,

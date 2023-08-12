@@ -7,7 +7,7 @@ import med.voll.api.dto.request.DtoActualizarMedico;
 import med.voll.api.dto.response.DtoListarMedicos;
 import med.voll.api.dto.request.DtoRegistroMedico;
 import med.voll.api.dto.response.DtoResponseMedico;
-import med.voll.api.service.implent.MedicoService;
+import med.voll.api.service.MedicoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

@@ -1,4 +1,4 @@
-package med.voll.api.service.implent;
+package med.voll.api.service;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,6 @@ import med.voll.api.dto.request.DtoRegistroMedico;
 import med.voll.api.dto.response.DtoResponseMedico;
 import med.voll.api.interfaces.MedicoRepository;
 import med.voll.api.model.Medico;
-import med.voll.api.service.interfaces.MedicoInterfaces;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class MedicoService implements MedicoInterfaces {
+public class MedicoService {
 
     private final MedicoRepository medicoRepository;
 

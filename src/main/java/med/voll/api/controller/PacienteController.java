@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import med.voll.api.dto.response.DtoListarPacientes;
 import med.voll.api.dto.request.DtoRegistroPaciente;
-import med.voll.api.service.implent.PacienteService;
+import med.voll.api.service.PacienteService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
