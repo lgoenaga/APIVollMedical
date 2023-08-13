@@ -1,10 +1,9 @@
 package med.voll.api.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.Valid;
+import lombok.*;
+import med.voll.api.dto.request.DtoDireccion;
 import med.voll.api.dto.request.DtoRegistroPaciente;
 
 @Table(name = "pacientes")
@@ -36,5 +35,25 @@ public class Paciente {
         this.direccion = new Direccion(dtoRegistroPaciente.direccion());
         this.codigoPostal = dtoRegistroPaciente.codigoPostal();
         this.provincia = dtoRegistroPaciente.provincia();
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setDireccion(@Valid DtoDireccion direccion) {
+           this.direccion = new Direccion(direccion);
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 }

@@ -69,4 +69,5 @@ public class MedicoController {
     public Page<DtoListarMedicos> buscarMedicoPorActivo(@PageableDefault(size = 5, sort = "nombre") Pageable paginacion) {
         return medicoService.buscarMedicoPorActivo(paginacion);
     }
+
 }
