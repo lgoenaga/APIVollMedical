@@ -24,6 +24,8 @@ public record DtoRegistroPaciente(
         DtoDireccion direccion,
 
        String codigoPostal,
-       String provincia
+       String provincia,
+
+       Boolean activo
 ) {
 }

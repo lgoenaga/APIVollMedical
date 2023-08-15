@@ -1,7 +1,6 @@
-use vollmed_api;
-create table pacientes(
+create table IF NOT EXISTS pacientes(
 
-                          id int not null auto_increment,
+                          id bigint not null auto_increment,
                           nombre varchar(100) not null,
                           email varchar(100) not null unique,
                           documento_identidad varchar(20) not null unique,

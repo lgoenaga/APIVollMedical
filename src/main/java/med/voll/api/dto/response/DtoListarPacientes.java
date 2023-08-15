@@ -6,7 +6,8 @@ public record DtoListarPacientes(
         String nombre,
         String email,
         String telefono,
-        String documentoIdentidad
+        String documentoIdentidad,
+        Boolean activo
 
     )
 {
@@ -15,7 +16,9 @@ public record DtoListarPacientes(
                 paciente.getNombre(),
                 paciente.getEmail(),
                 paciente.getTelefono(),
-                paciente.getDocumentoIdentidad()
+                paciente.getDocumentoIdentidad(),
+                paciente.getActivo()
         );
     }
+
 }

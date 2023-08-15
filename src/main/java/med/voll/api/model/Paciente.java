@@ -17,6 +17,7 @@ public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     String nombre;
     String email;
     String telefono;
@@ -26,6 +27,7 @@ public class Paciente {
 
     String codigoPostal;
     String provincia;
+    private Boolean activo = true;
 
     public Paciente(DtoRegistroPaciente dtoRegistroPaciente) {
         this.nombre = dtoRegistroPaciente.nombre();
@@ -35,6 +37,7 @@ public class Paciente {
         this.direccion = new Direccion(dtoRegistroPaciente.direccion());
         this.codigoPostal = dtoRegistroPaciente.codigoPostal();
         this.provincia = dtoRegistroPaciente.provincia();
+        this.activo = true;
     }
 
     public void setNombre(String nombre) {

@@ -1,5 +1,4 @@
-use vollmed_api;
-create table medicos (
+create table IF NOT EXISTS medicos (
                          id bigint not null auto_increment,
                          nombre varchar(100) not null,
                          email varchar(100) not null unique,

@@ -1,5 +1,4 @@
-use vollmed_api;
-create table usuarios (
+create table IF NOT EXISTS usuarios (
                          id bigint not null auto_increment,
                          login varchar(100) not null,
                          password varchar(300) not null,
