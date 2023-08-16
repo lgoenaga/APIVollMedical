@@ -27,7 +27,7 @@ public class Paciente {
 
     String codigoPostal;
     String provincia;
-    private Boolean activo = true;
+    Boolean activo = true;
 
     public Paciente(DtoRegistroPaciente dtoRegistroPaciente) {
         this.nombre = dtoRegistroPaciente.nombre();
