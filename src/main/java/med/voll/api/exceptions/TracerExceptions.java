@@ -1,6 +1,8 @@
 package med.voll.api.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ValidationException;
+import med.voll.api.validations.HorarioAtencion;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,4 +34,8 @@ public class TracerExceptions {
         return ResponseEntity.status(409).body("Data integrity violation\n"+ e.getMessage()+"\n");
     }
 
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<Object> validationException(ValidationException e) {
+        return ResponseEntity.status(406).body("Error en validaciones de consulta\n"+ e.getMessage()+"\n");
+    }
 }

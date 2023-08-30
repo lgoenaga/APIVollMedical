@@ -9,10 +9,8 @@ import med.voll.api.interfaces.MedicoRepository;
 import med.voll.api.interfaces.PacienteRepository;
 import med.voll.api.model.Consulta;
 import med.voll.api.model.Medico;
-import med.voll.api.model.Paciente;
+import med.voll.api.validations.HorarioAtencion;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,6 +20,7 @@ public class ConsultaService {
     private final ConsultaRepository consultaRepository;
     private final MedicoRepository medicoRepository;
     private final PacienteRepository pacienteRepository;
+    private final HorarioAtencion horarioAtencion;
 
     public DtoDetalleConsulta agendarConsulta(DtoAgendarConsulta dtoAgendarConsulta){
 
@@ -37,6 +36,7 @@ public class ConsultaService {
 
         var medico = seleccionarMedico(dtoAgendarConsulta);
 
+        horarioAtencion.validar(dtoAgendarConsulta);
 
         var consulta = new Consulta(null,medico, paciente, dtoAgendarConsulta.fecha());
 

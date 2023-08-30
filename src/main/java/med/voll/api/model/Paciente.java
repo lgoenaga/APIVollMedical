@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.*;
 import med.voll.api.dto.request.DtoDireccion;
 import med.voll.api.dto.request.DtoRegistroPaciente;
+import org.hibernate.annotations.Proxy;
 
 import java.io.Serializable;
 
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Proxy(lazy = false)
 public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;

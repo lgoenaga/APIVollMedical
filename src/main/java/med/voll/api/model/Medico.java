@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.dto.request.DtoDireccion;
 import med.voll.api.dto.request.DtoRegistroMedico;
+import org.hibernate.annotations.Proxy;
 
 import java.io.Serializable;
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Proxy(lazy = false)
 public class Medico implements Serializable {
 
     private static final long serialVersionUID = 1L;

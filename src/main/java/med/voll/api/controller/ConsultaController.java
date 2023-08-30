@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import med.voll.api.dto.request.DtoAgendarConsulta;
-import med.voll.api.model.Consulta;
 import med.voll.api.service.ConsultaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +17,17 @@ public class ConsultaController {
 
     private final ConsultaService consultaService;
 
-    @PostMapping
+    @PostMapping()
     @Transactional
-    public ResponseEntity consultaAgendar(@RequestBody @Valid DtoAgendarConsulta dtoAgendarConsulta){
+    public ResponseEntity<Object> consultaAgendar(@RequestBody @Valid DtoAgendarConsulta dtoAgendarConsulta){
 
-        return new ResponseEntity(consultaService.agendarConsulta(dtoAgendarConsulta), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(consultaService.agendarConsulta(dtoAgendarConsulta));
     }
 
-    @GetMapping
-    public ResponseEntity consultarConsultas(){
+    @GetMapping()
+    public ResponseEntity<Object> consultarConsultas(){
 
-        return new ResponseEntity(consultaService.listarConsultas(), HttpStatus.OK);
+        return ResponseEntity.ok(consultaService.listarConsultas());
     }
 
 }
