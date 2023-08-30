@@ -4,9 +4,12 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ValidationException;
 import med.voll.api.validations.HorarioAtencion;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -38,4 +41,5 @@ public class TracerExceptions {
     public ResponseEntity<Object> validationException(ValidationException e) {
         return ResponseEntity.status(406).body("Error en validaciones de consulta\n"+ e.getMessage()+"\n");
     }
+
 }

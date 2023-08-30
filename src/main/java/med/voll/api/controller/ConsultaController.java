@@ -19,7 +19,7 @@ public class ConsultaController {
 
     @PostMapping()
     @Transactional
-    public ResponseEntity<Object> consultaAgendar(@RequestBody @Valid DtoAgendarConsulta dtoAgendarConsulta){
+    public ResponseEntity consultaAgendar(@RequestBody @Valid DtoAgendarConsulta dtoAgendarConsulta){
 
         return ResponseEntity.status(HttpStatus.CREATED).body(consultaService.agendarConsulta(dtoAgendarConsulta));
     }
