@@ -4,13 +4,14 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import med.voll.api.dto.request.DtoActualizarMedico;
-import med.voll.api.dto.response.DtoListarMedicos;
 import med.voll.api.dto.request.DtoRegistroMedico;
+import med.voll.api.dto.response.DtoListarMedicos;
 import med.voll.api.dto.response.DtoResponseMedico;
 import med.voll.api.service.MedicoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,10 +46,10 @@ public class MedicoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<DtoActualizarMedico> actualizarMedico(@PathVariable Long id, @RequestBody @Valid DtoActualizarMedico dtoActualizarMedico) {
+    public ResponseEntity<Object> actualizarMedico(@PathVariable Long id, @RequestBody @Valid DtoActualizarMedico dtoActualizarMedico) {
         medicoService.actualizarMedico(id, dtoActualizarMedico);
 
-        return ResponseEntity.ok(dtoActualizarMedico);
+        return new ResponseEntity<> (dtoActualizarMedico, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -62,7 +63,7 @@ public class MedicoController {
 
         medicoService.eliminarMedicoLogico(id);
 
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/buscar")

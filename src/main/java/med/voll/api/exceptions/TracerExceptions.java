@@ -27,4 +27,9 @@ public class TracerExceptions {
         return ResponseEntity.status(409).body("Data integrity violation\n"+ e.getMostSpecificCause()+"\n");
     }
 
+    @ExceptionHandler(ValidacionIntegridad.class)
+    public ResponseEntity<Object> validacionIntegridad(ValidacionIntegridad e) {
+        return ResponseEntity.status(409).body("Data integrity violation\n"+ e.getMessage()+"\n");
+    }
+
 }

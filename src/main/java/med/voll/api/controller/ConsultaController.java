@@ -4,13 +4,12 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import med.voll.api.dto.request.DtoAgendarConsulta;
-import med.voll.api.dto.response.DtoDetalleConsulta;
+import med.voll.api.model.Consulta;
 import med.voll.api.service.ConsultaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("consultas")
@@ -21,8 +20,15 @@ public class ConsultaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity consultaAgendar(@RequestBody @Valid DtoAgendarConsulta dtoAgendarConsulta) throws Exception{
-        consultaService.agendarConsulta(dtoAgendarConsulta);
-        return ResponseEntity.created(null).body(new DtoDetalleConsulta(dtoAgendarConsulta));
+    public ResponseEntity consultaAgendar(@RequestBody @Valid DtoAgendarConsulta dtoAgendarConsulta){
+
+        return new ResponseEntity(consultaService.agendarConsulta(dtoAgendarConsulta), HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity consultarConsultas(){
+
+        return new ResponseEntity(consultaService.listarConsultas(), HttpStatus.OK);
+    }
+
 }

@@ -9,13 +9,17 @@ import lombok.NoArgsConstructor;
 import med.voll.api.dto.request.DtoDireccion;
 import med.voll.api.dto.request.DtoRegistroMedico;
 
+import java.io.Serializable;
+
 @Table(name = "medicos")
 @Entity(name = "Medico")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Medico {
+public class Medico implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +61,16 @@ public class Medico {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", documento='" + documento + '\'' +
+                ", especialidad=" + especialidad +
+                '}';
     }
 }

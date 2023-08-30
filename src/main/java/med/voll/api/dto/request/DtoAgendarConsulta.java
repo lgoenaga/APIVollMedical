@@ -2,7 +2,6 @@ package med.voll.api.dto.request;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
-import med.voll.api.model.Consulta;
 import med.voll.api.model.Especialidad;
 
 import java.time.LocalDateTime;

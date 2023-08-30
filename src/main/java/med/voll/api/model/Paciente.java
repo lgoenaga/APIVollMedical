@@ -6,13 +6,17 @@ import lombok.*;
 import med.voll.api.dto.request.DtoDireccion;
 import med.voll.api.dto.request.DtoRegistroPaciente;
 
+import java.io.Serializable;
+
 @Table(name = "pacientes")
 @Entity(name = "Paciente")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Paciente {
+public class Paciente implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,5 +62,16 @@ public class Paciente {
 
     public void setProvincia(String provincia) {
         this.provincia = provincia;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", nombre='" + nombre +
+                ", email='" + email +
+                ", telefono='" + telefono +
+                ", documentoIdentidad='" + documentoIdentidad +
+                '}';
     }
 }

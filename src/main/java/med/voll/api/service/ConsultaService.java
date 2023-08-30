@@ -2,13 +2,18 @@ package med.voll.api.service;
 
 import lombok.RequiredArgsConstructor;
 import med.voll.api.dto.request.DtoAgendarConsulta;
+import med.voll.api.dto.response.DtoDetalleConsulta;
 import med.voll.api.exceptions.ValidacionIntegridad;
 import med.voll.api.interfaces.ConsultaRepository;
 import med.voll.api.interfaces.MedicoRepository;
 import med.voll.api.interfaces.PacienteRepository;
 import med.voll.api.model.Consulta;
 import med.voll.api.model.Medico;
+import med.voll.api.model.Paciente;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,11 +23,11 @@ public class ConsultaService {
     private final MedicoRepository medicoRepository;
     private final PacienteRepository pacienteRepository;
 
-    public void agendarConsulta(DtoAgendarConsulta dtoAgendarConsulta){
+    public DtoDetalleConsulta agendarConsulta(DtoAgendarConsulta dtoAgendarConsulta){
 
         var paciente = pacienteRepository.getReferenceById(dtoAgendarConsulta.idPaciente());
 
-        if(paciente == null){
+        if(paciente.equals("")){
             throw new ValidacionIntegridad("Paciente no encontrado");
         }
 
@@ -35,7 +40,12 @@ public class ConsultaService {
 
         var consulta = new Consulta(null,medico, paciente, dtoAgendarConsulta.fecha());
 
-        consultaRepository.save(consulta);
+        DtoDetalleConsulta dtoDetalleConsulta = new DtoDetalleConsulta(consulta.getPaciente().toString(), consulta.getMedico().toString(), consulta.getFecha());
+
+
+       consultaRepository.save(consulta);
+
+        return (dtoDetalleConsulta);
 
     }
 
@@ -64,8 +74,12 @@ public class ConsultaService {
         if(asignado != null){
             throw new ValidacionIntegridad("Medico no disponible para la fecha seleccionada");
         }
-
+        
         return medico;
+    }
+
+    public List<Consulta> listarConsultas(){
+        return consultaRepository.findAll();
     }
 
 }
